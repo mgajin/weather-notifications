@@ -36,3 +36,40 @@ exports.register = async (req, res) => {
         console.log(error);
     }
 };
+
+exports.login = async (req, res) => {
+    try {
+        let user;
+
+        if (req.body.email) {
+            user = await User.findOne({ email: req.body.email }).select(
+                '+password'
+            );
+        } else {
+            user = await User.findOne({ username: req.body.username }).select(
+                '+password'
+            );
+        }
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        // password validation
+        let match = bcrypt.compareSync(req.body.password, user.password);
+
+        // return false if wrong password
+        if (!match)
+            return res
+                .status(401)
+                .send({ auth: false, token: null, msg: 'Wrong password!' });
+
+        let token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: 86400
+        });
+
+        res.status(200).send({ auth: true, token, user });
+    } catch (error) {
+        console.log(error);
+    }
+};

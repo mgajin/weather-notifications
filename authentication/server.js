@@ -28,3 +28,21 @@ app.use(function(req, res, next) {
     res.header('access-Control-Allow-Methods', 'GET, POST, DELETE');
     next();
 });
+
+// Mount routes
+app.use(require('./routes/auth'));
+
+const server = app.listen(
+    PORT,
+    console.log(
+        `Server runing in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
+            .bold
+    )
+);
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err, promise) => {
+    console.log(`Error: ${err.message}`.red);
+    // Close server & exit process
+    server.close(() => process.exit(1));
+});

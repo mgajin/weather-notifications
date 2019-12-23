@@ -9,7 +9,7 @@ exports.register = async (req, res) => {
     const { name, email, username, password, password2 } = req.body;
 
     if (password !== password2) {
-        return status(500).send('Passwords do not match');
+        return res.status(500).send('Passwords do not match');
     }
 
     const hashed = bcrypt.hashSync(password, 8);

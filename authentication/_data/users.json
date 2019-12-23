@@ -1,0 +1,118 @@
+[{
+        "_id": "5d7a514b5d2c12c7449be042",
+        "name": "Marko Gajin",
+        "email": "marko@gmail.com",
+        "username": "mgajin",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "admin"
+    },
+    {
+        "_id": "5d7a514b5d2c12c7449be045",
+        "name": "John Doe",
+        "email": "johndoe@gmail.com",
+        "username": "mgajin",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5d7a514b5d2c12c7449be046",
+        "name": "Kevin Smith",
+        "email": "kevin@gmail.com",
+        "username": "kevins",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc031",
+        "name": "Mary Williams",
+        "email": "mary@gmail.com",
+        "username": "marywill",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc032",
+        "name": "Sasha Ryan",
+        "email": "sasha@gmail.com",
+        "username": "sashar",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc033",
+        "name": "Greg Harris",
+        "email": "greg@gmail.com",
+        "username": "harrisg",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc034",
+        "name": "Derek Glover",
+        "email": "derek@gmail.com",
+        "username": "derekgl",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc035",
+        "name": "Stephanie Hanson",
+        "email": "steph@gmail.com",
+        "username": "hanson",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc036",
+        "name": "Jerry Wiliams",
+        "email": "jerryw@gmail.com",
+        "username": "mgajin",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc037",
+        "name": "Maggie Johnson",
+        "email": "maggiej@gmail.com",
+        "username": "mgajin",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc038",
+        "name": "Barry Dickens",
+        "email": "barryd@gmail.com",
+        "username": "mgajin",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc039",
+        "name": "Ryan Bolin",
+        "email": "ryan@gmail.com",
+        "username": "ryanb",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    },
+    {
+        "_id": "5c8a1d5b0190b214360dc040",
+        "name": "Sara Kensing",
+        "email": "ksara@gmail.com",
+        "username": "mgajin",
+        "password": "123456",
+        "passwor2": "123456",
+        "role": "user"
+    }
+]

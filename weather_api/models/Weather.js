@@ -29,6 +29,9 @@ const WeatherSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Feels like is required']
     },
+    humidity: {
+        type: Number
+    },
     updated: {
         type: Date,
         default: Date.now

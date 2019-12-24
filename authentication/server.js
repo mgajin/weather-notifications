@@ -30,7 +30,8 @@ app.use(function(req, res, next) {
 });
 
 // Mount routes
-app.use(require('./routes/auth'));
+app.use('/auth', require('./routes/auth'));
+app.use('/service', require('./routes/service'));
 
 const server = app.listen(
     PORT,

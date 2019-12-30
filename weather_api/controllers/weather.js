@@ -2,6 +2,7 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 const Weather = require('../models/Weather');
 const colors = require('colors');
+const schedule = require('node-schedule');
 
 // Load env variables
 dotenv.config({
@@ -37,3 +38,41 @@ exports.getWeather = async (req, res) => {
         console.log(error);
     }
 };
+
+// Update weathers in database
+let job = schedule.scheduleJob('*/1 * * * *', () => {
+    const city = 'New York';
+    let weather;
+
+    axios
+        .get(
+            `${process.env.CURRENT_WEATHER}?q=${city}&appid=${process.env.API_KEY}`
+        )
+        .then(async response => {
+            const { description } = response.data.weather[0];
+            const { main } = response.data;
+
+            const weatherBody = {
+                city,
+                description: description,
+                temp: main.temp,
+                min_temp: main.temp_min,
+                max_temp: main.temp_max,
+                feels_like: main.feels_like,
+                updated: Date.now()
+            };
+
+            weather = await Weather.findOne({ city });
+
+            if (!weather) {
+                weather = await Weather.create(weatherBody);
+            } else {
+                weather = await Weather.findByIdAndUpdate(
+                    weather._id,
+                    weatherBody
+                );
+            }
+            console.log('Database updated...'.bold);
+        })
+        .catch(err => console.log(err));
+});

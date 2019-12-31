@@ -52,15 +52,20 @@ WeatherSchema.statics.fetchData = async function(city) {
     }
 
     const { description } = response.data.weather[0];
-    const { main } = response.data;
+    let { temp, temp_min, temp_max, feels_like } = response.data.main;
+
+    temp = temp.toFixed(0) - 273;
+    temp_min = temp_min.toFixed(0) - 273;
+    temp_max = temp_max.toFixed(0) - 273;
+    feels_like = feels_like.toFixed(0) - 273;
 
     const weather = {
         city: city,
         description: description,
-        temp: main.temp,
-        min_temp: main.temp_min,
-        max_temp: main.temp_max,
-        feels_like: main.feels_like,
+        temp: temp,
+        min_temp: temp_min,
+        max_temp: temp_max,
+        feels_like: feels_like,
         updated: Date.now()
     };
 

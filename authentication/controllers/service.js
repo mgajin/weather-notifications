@@ -1,4 +1,5 @@
 const Service = require('../models/Service');
+const axios = require('axios');
 
 // @desc    Get all available services
 // @route   GET /v1
@@ -30,4 +31,24 @@ exports.getService = async (req, res) => {
 
         res.status(200).json({ success: true, service });
     } catch (error) {}
+};
+
+exports.getWeather = async (req, res) => {
+    const city = req.params.city;
+
+    if (!city) {
+        return res.status(404).send('Enter city name');
+    }
+
+    const response = await axios
+        .get(`http://localhost:3002/weather/${city}`)
+        .catch(err => console.log(err));
+
+    const weather = response.data.weather;
+
+    if (!weather) {
+        return res.status(404).send(`Weather for ${city} not found`);
+    }
+
+    res.status(200).json({ success: true, weather });
 };

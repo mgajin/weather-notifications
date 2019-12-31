@@ -2,7 +2,7 @@ const Service = require('../models/Service');
 const axios = require('axios');
 
 // @desc    Get all available services
-// @route   GET /v1
+// @route   GET /service
 exports.getServices = async (req, res) => {
     try {
         const services = await Service.find();
@@ -18,7 +18,7 @@ exports.getServices = async (req, res) => {
 };
 
 // @desc    Get single service by ID
-// @route   GET /v1/:id
+// @route   GET /service/:id
 exports.getService = async (req, res) => {
     try {
         const service = await Service.findById(req.params.id);
@@ -33,6 +33,8 @@ exports.getService = async (req, res) => {
     } catch (error) {}
 };
 
+// @desc    Get weather from weather service api
+// @route   GET /service/weather/:city
 exports.getWeather = async (req, res) => {
     const city = req.params.city;
 

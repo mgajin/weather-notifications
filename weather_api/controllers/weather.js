@@ -10,7 +10,7 @@ dotenv.config({
 });
 
 // @desc    Get current weather from Open Weather API and store it to DB
-// @route   GET /weather/v1/update/:city
+// @route   GET /weather/fetch/:city
 exports.fetchWeather = async (req, res) => {
     const city = req.params.city;
 
@@ -24,7 +24,7 @@ exports.fetchWeather = async (req, res) => {
 };
 
 // @desc    Get weather from DB
-// @route   GET weather/v1/:city
+// @route   GET /weather/:city
 exports.getWeather = async (req, res) => {
     try {
         let weather = await Weather.findOne({ city: req.params.city });
@@ -42,7 +42,7 @@ exports.getWeather = async (req, res) => {
 };
 
 // @desc    Get weather data and save it to database
-// @route   POST weather/v1/:city
+// @route   POST /weather
 exports.addWeather = async (req, res) => {
     const city = req.body.city;
 
@@ -60,8 +60,8 @@ exports.addWeather = async (req, res) => {
     res.status(201).json({ success: true });
 };
 
-// @desc    Get weather data and save it to database
-// @route   PUT weather/v1/
+// @desc    Get weather data and update DB
+// @route   PUT /weather
 exports.updateWeather = async (req, res) => {
     const city = req.body.city;
 
@@ -82,14 +82,14 @@ exports.updateWeather = async (req, res) => {
     res.status(201).json({ success: true, weather });
 };
 
-// Update weathers in database
+// Update database every minute
 let job = schedule.scheduleJob('*/1 * * * *', async () => {
     let weathers = await Weather.find();
 
     for (let i in weathers) {
         let weather = weathers[i];
 
-        let response = await axios.put(`http://localhost:3002/v1/weather`, {
+        let response = await axios.put(`http://localhost:3002/weather`, {
             city: weather.city
         });
 

@@ -26,19 +26,23 @@ exports.fetchWeather = async (req, res) => {
 // @desc    Get weather from DB
 // @route   GET /weather/:city
 exports.getWeather = async (req, res) => {
-    try {
-        let weather = await Weather.findOne({ city: req.params.city });
+    let weather = await Weather.findOne({ city: req.params.city });
 
-        if (!weather) {
+    if (!weather) {
+        let response = await axios.post('http://localhost:3002/weather', {
+            city: req.params.city
+        });
+
+        if (!response) {
             return res
                 .status(404)
                 .send(`Weather for ${req.params.city} not available`);
         }
 
-        res.status(200).json({ success: true, weather });
-    } catch (error) {
-        console.log(error);
+        weather = response.data.weather;
     }
+
+    res.status(200).json({ success: true, weather });
 };
 
 // @desc    Get weather data and save it to database
@@ -57,7 +61,7 @@ exports.addWeather = async (req, res) => {
         console.log(`Weather for ${city} added to database`);
     }
 
-    res.status(201).json({ success: true });
+    res.status(201).json({ success: true, weather });
 };
 
 // @desc    Get weather data and update DB
@@ -83,19 +87,19 @@ exports.updateWeather = async (req, res) => {
 };
 
 // Update database every minute
-let job = schedule.scheduleJob('*/1 * * * *', async () => {
-    let weathers = await Weather.find();
+// let job = schedule.scheduleJob('*/1 * * * *', async () => {
+//     let weathers = await Weather.find();
 
-    for (let i in weathers) {
-        let weather = weathers[i];
+//     for (let i in weathers) {
+//         let weather = weathers[i];
 
-        let response = await axios.put(`http://localhost:3002/weather`, {
-            city: weather.city
-        });
+//         let response = await axios.put(`http://localhost:3002/weather`, {
+//             city: weather.city
+//         });
 
-        if (!response) {
-            console.log(`Unable to update weather for ${city}`.red);
-        }
-    }
-    console.log('Database updated...'.bold);
-});
+//         if (!response) {
+//             console.log(`Unable to update weather for ${city}`.red);
+//         }
+//     }
+//     console.log('Database updated...'.bold);
+// });

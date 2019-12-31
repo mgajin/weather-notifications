@@ -54,6 +54,7 @@ WeatherSchema.statics.fetchData = async function(city) {
     const { description } = response.data.weather[0];
     let { temp, temp_min, temp_max, feels_like } = response.data.main;
 
+    // Convert K to C
     temp = temp.toFixed(0) - 273;
     temp_min = temp_min.toFixed(0) - 273;
     temp_max = temp_max.toFixed(0) - 273;

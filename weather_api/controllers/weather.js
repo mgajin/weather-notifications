@@ -12,10 +12,12 @@ dotenv.config({
 // @desc    Get current weather from Open Weather API and store it to DB
 // @route   GET /weather/v1/update/:city
 exports.fetchWeather = async (req, res) => {
-    let weather = Weather.updateDB();
+    const city = req.params.city;
+
+    let weather = await Weather.fetchData(city);
 
     if (!weather) {
-        return res.status(404).send('Not working...');
+        return res.status(404).send(`Weather for ${city} not found`);
     }
 
     res.status(201).json({ success: true, weather });
@@ -39,40 +41,61 @@ exports.getWeather = async (req, res) => {
     }
 };
 
+// @desc    Get weather data and save it to database
+// @route   POST weather/v1/:city
+exports.addWeather = async (req, res) => {
+    const city = req.body.city;
+
+    let weather = await Weather.findOne({ city });
+
+    if (!weather) {
+        const data = await Weather.fetchData(city);
+        if (!data) {
+            return res.status(404).send(`Weather for ${city} not available`);
+        }
+        weather = await Weather.create(data);
+        console.log(`Weather for ${city} added to database`);
+    }
+
+    res.status(201).json({ success: true });
+};
+
+// @desc    Get weather data and save it to database
+// @route   PUT weather/v1/
+exports.updateWeather = async (req, res) => {
+    const city = req.body.city;
+
+    let weather = await Weather.findOne({ city });
+
+    if (!weather) {
+        return res.status(404).send(`Weather for ${city} not found`);
+    }
+
+    const data = await Weather.fetchData(city);
+
+    if (!data) {
+        return res.status(404).send(`Weather for ${city} not available`);
+    }
+
+    weather = await Weather.findByIdAndUpdate(weather._id, data);
+
+    res.status(201).json({ success: true, weather });
+};
+
 // Update weathers in database
-let job = schedule.scheduleJob('*/1 * * * *', () => {
-    const city = 'New York';
-    let weather;
+let job = schedule.scheduleJob('*/1 * * * *', async () => {
+    let weathers = await Weather.find();
 
-    axios
-        .get(
-            `${process.env.CURRENT_WEATHER}?q=${city}&appid=${process.env.API_KEY}`
-        )
-        .then(async response => {
-            const { description } = response.data.weather[0];
-            const { main } = response.data;
+    for (let i in weathers) {
+        let weather = weathers[i];
 
-            const weatherBody = {
-                city,
-                description: description,
-                temp: main.temp,
-                min_temp: main.temp_min,
-                max_temp: main.temp_max,
-                feels_like: main.feels_like,
-                updated: Date.now()
-            };
+        let response = await axios.put(`http://localhost:3002/v1/weather`, {
+            city: weather.city
+        });
 
-            weather = await Weather.findOne({ city });
-
-            if (!weather) {
-                weather = await Weather.create(weatherBody);
-            } else {
-                weather = await Weather.findByIdAndUpdate(
-                    weather._id,
-                    weatherBody
-                );
-            }
-            console.log('Database updated...'.bold);
-        })
-        .catch(err => console.log(err));
+        if (!response) {
+            console.log(`Unable to update weather for ${city}`.red);
+        }
+    }
+    console.log('Database updated...'.bold);
 });

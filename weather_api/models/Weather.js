@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const axios = require('axios');
 
 const WeatherSchema = new mongoose.Schema({
     city: {
@@ -33,5 +35,36 @@ const WeatherSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+
+// Load env variables
+dotenv.config({
+    path: './config/config.env'
+});
+
+// Fetch current weather from Open Weather API
+WeatherSchema.statics.fetchData = async function(city) {
+    const response = await axios.get(
+        `${process.env.CURRENT_WEATHER}?q=${city}&appid=${process.env.API_KEY}`
+    );
+
+    if (!response) {
+        return false;
+    }
+
+    const { description } = response.data.weather[0];
+    const { main } = response.data;
+
+    const weather = {
+        city: city,
+        description: description,
+        temp: main.temp,
+        min_temp: main.temp_min,
+        max_temp: main.temp_max,
+        feels_like: main.feels_like,
+        updated: Date.now()
+    };
+
+    return weather;
+};
 
 module.exports = mongoose.model('Weather', WeatherSchema);

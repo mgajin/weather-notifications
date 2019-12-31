@@ -87,19 +87,19 @@ exports.updateWeather = async (req, res) => {
 };
 
 // Update database every minute
-// let job = schedule.scheduleJob('*/1 * * * *', async () => {
-//     let weathers = await Weather.find();
+let job = schedule.scheduleJob('*/1 * * * *', async () => {
+    let weathers = await Weather.find();
 
-//     for (let i in weathers) {
-//         let weather = weathers[i];
+    for (let i in weathers) {
+        let weather = weathers[i];
 
-//         let response = await axios.put(`http://localhost:3002/weather`, {
-//             city: weather.city
-//         });
+        let response = await axios.put(`http://localhost:3002/weather`, {
+            city: weather.city
+        });
 
-//         if (!response) {
-//             console.log(`Unable to update weather for ${city}`.red);
-//         }
-//     }
-//     console.log('Database updated...'.bold);
-// });
+        if (!response) {
+            console.log(`Unable to update weather for ${city}`.red);
+        }
+    }
+    console.log('Database updated...'.bold);
+});

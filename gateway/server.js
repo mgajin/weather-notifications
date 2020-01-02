@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 
 const server = gateway({
     routes: [
-        { prefix: '/auth', target: 'http://localhost:3001/' },
+        { prefix: '/user', target: 'http://localhost:3001/' },
         { prefix: '/weather', target: 'http://localhost:3002/' }
     ]
 });

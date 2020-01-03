@@ -29,7 +29,7 @@ exports.getWeather = async (req, res) => {
     let weather = await Weather.findOne({ city: req.params.city });
 
     if (!weather) {
-        let response = await axios.post('http://localhost:3002/weather', {
+        let response = await axios.post('http://localhost:3002/v1', {
             city: req.params.city
         });
 
@@ -93,7 +93,7 @@ let job = schedule.scheduleJob('*/1 * * * *', async () => {
     for (let i in weathers) {
         let weather = weathers[i];
 
-        let response = await axios.put(`http://localhost:3002/weather`, {
+        let response = await axios.put(`http://localhost:3002/v1`, {
             city: weather.city
         });
 

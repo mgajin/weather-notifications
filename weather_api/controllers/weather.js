@@ -10,7 +10,7 @@ dotenv.config({
 });
 
 // @desc    Get current weather from Open Weather API and store it to DB
-// @route   GET /weather/fetch/:city
+// @route   GET /v1/fetch/:city
 exports.fetchWeather = async (req, res) => {
     const city = req.params.city;
 
@@ -24,7 +24,7 @@ exports.fetchWeather = async (req, res) => {
 };
 
 // @desc    Get weather from DB
-// @route   GET /weather/:city
+// @route   GET /v1/:city
 exports.getWeather = async (req, res) => {
     let weather = await Weather.findOne({ city: req.params.city });
 
@@ -46,7 +46,7 @@ exports.getWeather = async (req, res) => {
 };
 
 // @desc    Get weather data and save it to database
-// @route   POST /weather
+// @route   POST /v1
 exports.addWeather = async (req, res) => {
     const city = req.body.city;
 
@@ -65,7 +65,7 @@ exports.addWeather = async (req, res) => {
 };
 
 // @desc    Get weather data and update DB
-// @route   PUT /weather
+// @route   PUT /v1
 exports.updateWeather = async (req, res) => {
     const city = req.body.city;
 

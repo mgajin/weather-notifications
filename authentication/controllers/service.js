@@ -43,7 +43,7 @@ exports.getWeather = async (req, res) => {
     }
 
     const response = await axios
-        .get(`http://localhost:3002/weather/${city}`)
+        .get(`http://localhost:3002/v1/${city}`)
         .catch(err => console.log(err));
 
     const weather = response.data.weather;

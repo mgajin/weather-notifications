@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Mount routes
-app.use('/weather', weather);
+app.use('/v1', weather);
 
 const PORT = process.env.PORT || 3002;
 

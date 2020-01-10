@@ -9,7 +9,7 @@ const {
 
 const router = exporess.Router();
 
-router.route('/fetch/:city').get(fetchWeather);
+router.route('/api/:city').get(fetchWeather);
 router.route('/:city').get(getWeather);
 router
     .route('/')

@@ -87,7 +87,7 @@ exports.updateWeather = async (req, res) => {
 };
 
 // Update database every minute
-let job = schedule.scheduleJob('*/1 * * * *', async () => {
+let update = schedule.scheduleJob('*/1 * * * *', async () => {
     let weathers = await Weather.find();
 
     for (let i in weathers) {

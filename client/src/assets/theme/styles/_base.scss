@@ -1,0 +1,118 @@
+body {
+    color: $dark;
+}
+
+input {
+    background: none;
+}
+
+a {
+    color: $blue;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 15px;
+    padding: 2em;
+    background: white;
+    color: $dark;
+    box-shadow: $shadow;
+}
+
+.btn {
+    background: $yellow;
+    border: none;
+    color: $dark;
+    text-transform: uppercase;
+}
+
+.navbar {
+    background: $dark;
+    min-height: 10vh;
+}
+
+.navbar-light .navbar-collapse {
+
+    .nav-link {
+        color: $transparent;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+
+    .nav-link:hover {
+        color: $light;
+    }
+}
+
+.dropdown {
+    border: solid;
+    height: 100%;
+    display: flex;
+    border: none;
+
+    .dropdown-toggle {
+        color: $transparent;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        background: none;
+        border: none;
+        padding: 0;
+    }
+}
+
+a:hover {
+    text-decoration: none;
+    color: $dark-blue;
+}
+
+.btn:hover {
+    background: $yellow;
+    color: $dark;
+}
+
+.input-group {
+    // max-width: 300px;
+
+    .form-control {
+        height: 2.5em;
+        border-radius: 50px;
+        background: white;
+        border: none;
+        // border: solid 1.5px $light;
+        // border-right: none;
+    }
+
+    button {
+        border-radius: 50px;
+        border: none;
+        // border: solid 1.5px $light;
+        // border-left: none;
+        background: white;
+        color: $dark-transparent;
+    }
+
+    button:hover {
+        color: $dark;
+        background: white;
+    }
+}
+
+footer {
+    height: 10vh;
+    background: $dark;
+    color: $transparent;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        padding: 0;
+        margin: 0;
+    }
+}

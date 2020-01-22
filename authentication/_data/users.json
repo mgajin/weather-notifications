@@ -8,15 +8,6 @@
         "role": "admin"
     },
     {
-        "_id": "5d7a514b5d2c12c7449be045",
-        "name": "John Doe",
-        "email": "johndoe@gmail.com",
-        "username": "mgajin",
-        "password": "123456",
-        "passwor2": "123456",
-        "role": "user"
-    },
-    {
         "_id": "5d7a514b5d2c12c7449be046",
         "name": "Kevin Smith",
         "email": "kevin@gmail.com",

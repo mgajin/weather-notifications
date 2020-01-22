@@ -1,5 +1,11 @@
 const Service = require('../models/Service');
 const axios = require('axios');
+const dotenv = require('dotenv');
+
+// Load env variables
+dotenv.config({
+    path: '../config/config.env'
+});
 
 // @desc    Get all available services
 // @route   GET /service
@@ -43,7 +49,7 @@ exports.getWeather = async (req, res) => {
     }
 
     const response = await axios
-        .get(`http://localhost:3002/v1/${city}`)
+        .get(`${process.env.GATEWAY}/weather/v1/${city}`)
         .catch(err => console.log(err));
 
     const weather = response.data.weather;

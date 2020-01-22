@@ -33,6 +33,7 @@ const WeatherSchema = new mongoose.Schema({
     wind: {
         type: Number
     },
+    // date: {},
     updated: {
         type: Date,
         default: Date.now
@@ -73,7 +74,7 @@ WeatherSchema.statics.fetchData = async function(city) {
         feels_like: feels_like,
         humidity: humidity,
         wind: speed,
-        updated: Date.now()
+        updated: new Date()
     };
 
     return weather;

@@ -33,7 +33,9 @@ const WeatherSchema = new mongoose.Schema({
     wind: {
         type: Number
     },
-    // date: {},
+    date: {
+        type: String
+    },
     updated: {
         type: Date,
         default: Date.now
@@ -44,6 +46,51 @@ const WeatherSchema = new mongoose.Schema({
 dotenv.config({
     path: './config/config.env'
 });
+
+// Format Date & Time
+function formatDate() {
+    const days = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+    ];
+
+    const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+
+    // Format Date
+    let today = new Date();
+    let dd = today.getDate();
+    const day = days[today.getDay() - 1];
+    const month = months[today.getMonth()];
+
+    today = `${day}, ${dd} ${month}`;
+
+    // Format Time
+    let time = new Date();
+    const h = time.getHours();
+    const m = time.getMinutes();
+
+    time = `${h}:${m}`;
+
+    return { today, time };
+}
 
 // Fetch current weather from Open Weather API
 WeatherSchema.statics.fetchData = async function(city) {
@@ -65,6 +112,8 @@ WeatherSchema.statics.fetchData = async function(city) {
     temp_max = temp_max.toFixed(0) - 273;
     feels_like = feels_like.toFixed(0) - 273;
 
+    const { today, time } = formatDate();
+
     const weather = {
         city: city,
         description: description,
@@ -74,7 +123,8 @@ WeatherSchema.statics.fetchData = async function(city) {
         feels_like: feels_like,
         humidity: humidity,
         wind: speed,
-        updated: new Date()
+        date: today,
+        updated: time
     };
 
     return weather;

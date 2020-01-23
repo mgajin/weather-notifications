@@ -40,11 +40,7 @@ exports.login = async (req, res) => {
     try {
         let user;
 
-        if (req.body.email) {
-            user = await User.findOne({ email: req.body.email }).select(
-                '+password'
-            );
-        } else {
+        if (req.body.username) {
             user = await User.findOne({ username: req.body.username }).select(
                 '+password'
             );

@@ -65,7 +65,7 @@ exports.getWeather = async (req, res) => {
 // @route   GET /service/weathers
 exports.getWeathers = async (req, res) => {
     const response = await axios
-        .get('http://localhost:3000/weather/v1/all')
+        .get('http://localhost:3000/weather/v1')
         .catch(err => console.log(err));
 
     const weathers = response.data.weathers;

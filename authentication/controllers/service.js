@@ -49,7 +49,7 @@ exports.getWeather = async (req, res) => {
     }
 
     const response = await axios
-        .get(`http://localhost:3000/weather/v1/${city}`)
+        .get(`http://localhost:3000/weather/v1/city?name=${city}`)
         .catch(err => console.log(err));
 
     const weather = response.data.weather;
@@ -59,4 +59,20 @@ exports.getWeather = async (req, res) => {
     }
 
     res.status(200).json({ success: true, weather });
+};
+
+// @desc    Get all weathers from service api database
+// @route   GET /service/weathers
+exports.getWeathers = async (req, res) => {
+    const response = await axios
+        .get('http://localhost:3000/weather/v1/all')
+        .catch(err => console.log(err));
+
+    const weathers = response.data.weathers;
+
+    if (!weathers.length) {
+        return res.status(404).send('Database is empty');
+    }
+
+    res.status(200).json({ success: true, weathers });
 };

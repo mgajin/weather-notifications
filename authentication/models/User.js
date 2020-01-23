@@ -27,8 +27,13 @@ const UserSchema = new mongoose.Schema({
         default: 'user'
     },
     subscription: {
-        type: Boolean,
-        default: false
+        list: {
+            type: Array
+        },
+        status: {
+            type: Boolean,
+            default: false
+        }
     },
     createdAt: {
         type: Date,

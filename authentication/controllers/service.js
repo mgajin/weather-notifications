@@ -1,6 +1,7 @@
 const Service = require('../models/Service');
 const axios = require('axios');
 const dotenv = require('dotenv');
+const User = require('../models/User');
 
 // Load env variables
 dotenv.config({
@@ -75,4 +76,26 @@ exports.getWeathers = async (req, res) => {
     }
 
     res.status(200).json({ success: true, weathers });
+};
+
+// @desc    Subscribe to mailing service
+// @route   PUT /service/subscribe
+exports.subscribe = async (req, res) => {
+    if (!req.body) {
+        return res.status(501).send('Body is empty');
+    }
+
+    const { username, city } = req.body;
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+        return res.status(404).send(`User ${username} not found`);
+    }
+
+    user.subscription.list.push(city);
+    user.subscription.status = true;
+    user.save();
+
+    res.status(200).json({ success: true, user });
 };

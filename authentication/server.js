@@ -32,6 +32,7 @@ app.use(function(req, res, next) {
 // Mount routes
 app.use('/v1/auth', require('./routes/auth'));
 app.use('/v1/service', require('./routes/service'));
+app.use('/v1/users', require('./routes/users'));
 
 const server = app.listen(
     PORT,

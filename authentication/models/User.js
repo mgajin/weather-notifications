@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     },
-    subscribed: {
+    subscription: {
         type: Boolean,
         default: false
     },

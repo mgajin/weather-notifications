@@ -24,9 +24,15 @@ exports.fetchWeather = async (req, res) => {
 };
 
 // @desc    Get weather from DB
-// @route   GET /v1/:city
+// @route   GET /v1/city?name=:city
 exports.getWeather = async (req, res) => {
-    let weather = await Weather.findOne({ city: req.params.city });
+    const city = req.query.name;
+
+    if (!city) {
+        return res.status(501).send('Enter city name');
+    }
+
+    let weather = await Weather.findOne({ city });
 
     if (!weather) {
         let response = await axios.post('http://localhost:3002/v1', {
@@ -84,6 +90,18 @@ exports.updateWeather = async (req, res) => {
     weather = await Weather.findByIdAndUpdate(weather._id, data);
 
     res.status(201).json({ success: true, weather });
+};
+
+// @desc    Get all weathers from database
+// @route   GET /v1/all
+exports.getAll = async (req, res) => {
+    const weathers = await Weather.find();
+
+    if (!weathers) {
+        return res.status(404).send('Database is empty');
+    }
+
+    res.status(200).json({ success: true, weathers });
 };
 
 // Update database every minute

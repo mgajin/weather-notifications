@@ -76,12 +76,10 @@ exports.login = async (req, res) => {
 // @desc    Log out / clear cookie
 // @route   GET /v1/auth/logout
 exports.logout = async (req, res) => {
-    res.cookie('token', ' ', {
+    res.cookie('token', 'none', {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true
     });
-
-    console.log(res.cookie('token').value);
 
     res.status(200).json({
         success: true,

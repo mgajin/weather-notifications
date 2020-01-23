@@ -8,10 +8,8 @@ const {
 
 const router = exporess.Router();
 
-router.route('/').get(getServices);
-
-router.route('/:id').get(getService);
-
-router.route('/weather/:city').get(getWeather);
+router.get('/', getServices);
+router.get('/:id', getService);
+router.get('/weather/:city', getWeather);
 
 module.exports = router;

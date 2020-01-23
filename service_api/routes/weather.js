@@ -5,7 +5,7 @@ const {
     getWeather,
     addWeather,
     updateWeather,
-    getAll
+    getWeathers
 } = require('../controllers/weather');
 
 const router = exporess.Router();
@@ -17,6 +17,6 @@ router
     .post(addWeather)
     .put(updateWeather);
 
-router.get('/all', getAll);
+router.get('/all', getWeathers);
 
 module.exports = router;

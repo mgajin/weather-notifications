@@ -42,7 +42,7 @@ const importData = async () => {
 // Delete data from DB
 const deleteData = async () => {
     try {
-        // await User.deleteMany();
+        await User.deleteMany();
         await Service.deleteMany();
 
         console.log('Data Deleted...'.red.inverse);

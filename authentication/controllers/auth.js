@@ -6,7 +6,7 @@ const User = require('../models/User');
 dotenv.config({ path: '../config.config.env' });
 
 exports.register = async (req, res) => {
-    const { name, email, username, password, password2 } = req.body;
+    const { email, username, password, password2 } = req.body;
 
     if (password !== password2) {
         return res.status(500).send('Passwords do not match');
@@ -16,7 +16,6 @@ exports.register = async (req, res) => {
 
     try {
         const user = await User.create({
-            name,
             email,
             username,
             password: hashed

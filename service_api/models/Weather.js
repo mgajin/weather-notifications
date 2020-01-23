@@ -37,8 +37,7 @@ const WeatherSchema = new mongoose.Schema({
         type: String
     },
     updated: {
-        type: Date,
-        default: Date.now
+        type: String
     }
 });
 

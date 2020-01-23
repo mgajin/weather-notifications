@@ -25,6 +25,17 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
+// CORS middleware
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    res.header('access-Control-Allow-Methods', 'GET, POST, DELETE');
+    next();
+});
+
 // Mount routes
 app.use('/v1', weather);
 

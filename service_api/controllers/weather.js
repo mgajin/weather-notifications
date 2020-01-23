@@ -93,7 +93,7 @@ exports.updateWeather = async (req, res) => {
 };
 
 // @desc    Get all weathers from database
-// @route   GET /v1/all
+// @route   GET /v1
 exports.getWeathers = async (req, res) => {
     const weathers = await Weather.find();
 

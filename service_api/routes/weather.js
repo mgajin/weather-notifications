@@ -15,8 +15,7 @@ router.route('/city').get(getWeather);
 router
     .route('/')
     .post(addWeather)
-    .put(updateWeather);
-
-router.get('/all', getWeathers);
+    .put(updateWeather)
+    .get(getWeathers);
 
 module.exports = router;

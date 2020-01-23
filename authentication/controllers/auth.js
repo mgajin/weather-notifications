@@ -5,6 +5,8 @@ const User = require('../models/User');
 
 dotenv.config({ path: '../config.config.env' });
 
+// @desc    Register new user
+// @route   POST /v1/auth/register
 exports.register = async (req, res) => {
     const { email, username, password, password2 } = req.body;
 
@@ -36,6 +38,8 @@ exports.register = async (req, res) => {
     }
 };
 
+// @desc    Account login
+// @route   POST /v1/auth/login
 exports.login = async (req, res) => {
     try {
         let user;

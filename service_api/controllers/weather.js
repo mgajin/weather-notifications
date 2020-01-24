@@ -35,9 +35,11 @@ exports.getWeather = async (req, res) => {
     let weather = await Weather.findOne({ city });
 
     if (!weather) {
-        let response = await axios.post('http://localhost:3002/v1', {
-            city: req.params.city
-        });
+        let response = await axios
+            .post('http://localhost:3002/v1', {
+                city: req.params.city
+            })
+            .catch(err => console.log(err));
 
         if (!response) {
             return res
@@ -111,9 +113,11 @@ let update = schedule.scheduleJob('*/1 * * * *', async () => {
     for (let i in weathers) {
         let weather = weathers[i];
 
-        let response = await axios.put(`http://localhost:3002/v1`, {
-            city: weather.city
-        });
+        let response = await axios
+            .put(`http://localhost:3002/v1`, {
+                city: weather.city
+            })
+            .catch(err => console.log(err));
 
         if (!response) {
             console.log(`Unable to update weather for ${city}`.red);

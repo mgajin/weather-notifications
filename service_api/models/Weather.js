@@ -93,9 +93,11 @@ function formatDate() {
 
 // Fetch current weather from Open Weather API
 WeatherSchema.statics.fetchData = async function(city) {
-    const response = await axios.get(
-        `${process.env.CURRENT_WEATHER}?q=${city}&appid=${process.env.API_KEY}`
-    );
+    const response = await axios
+        .get(
+            `${process.env.CURRENT_WEATHER}?q=${city}&appid=${process.env.API_KEY}`
+        )
+        .catch(err => console.log(err));
 
     if (!response) {
         return false;

@@ -1,0 +1,57 @@
+#home {
+    background: $blue;
+    color: $light;
+
+    .btn {
+        margin-bottom: 1em;
+        height: 3em;
+    }
+
+    #about {
+        padding: 0 2em;
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+#service {
+    background: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 1em;
+
+    h2 {
+        margin-top: 0.5em;
+    }
+
+    p {
+        text-align: justify;
+    }
+
+    .btn {
+        margin-bottom: 1em;
+        height: 3em;
+    }
+
+    hr {
+        color: $dark;
+        background: $dark;
+    }
+
+}
+
+#doc,
+#sub {
+    background: none;
+    border: solid 1.5px $yellow;
+    color: $dark;
+
+}
+
+#sub:hover {
+    background: $yellow;
+}

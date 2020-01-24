@@ -1,38 +1,38 @@
 <template>
-  <div class="page">
-    <form>
-      <div class="form-group">
-        <label for>Name</label>
-        <input type="text" v-model="name" placeholder="Enter your name" class="form-control" />
+  <div class="container landing">
+    <div class="row" id="form-card">
+      <div class="col-12 card-title">
+        <h3>register</h3>
       </div>
-      <div class="form-group">
-        <label for>Username</label>
-        <input type="text" v-model="username" placeholder="Enter username" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for>Email address</label>
-        <input type="text" v-model="email" placeholder="Enter email" class="form-control" />
-      </div>
+      <form class="col-12" action="submit">
+        <input type="text" class="form-control" placeholder="Username" required v-model="username" />
 
-      <div class="form-group">
-        <label for>Password</label>
-        <input type="password" v-model="password" placeholder="Enter password" class="form-control" />
-      </div>
-      <div class="form-group">
-        <label for>Confirm password</label>
+        <input type="email" class="form-control" placeholder="Email" required v-model="email" />
+
         <input
           type="password"
-          v-model="password2"
-          placeholder="Enter password"
           class="form-control"
+          placeholder="Password"
+          required
+          v-model="password"
         />
-      </div>
-      <button type="submit" @click="register" class="btn btn-primary">Register</button>
-      <div>
-        <label for>Have an account?</label>
-        <router-link to="/login">Log in</router-link>
-      </div>
-    </form>
+
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Confirm Password"
+          required
+          v-model="password2"
+        />
+
+        <button type="submit" class="btn" @click="register">submit</button>
+
+        <p>
+          Already have an account?
+          <router-link to="/login">Sign In</router-link>
+        </p>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -43,7 +43,6 @@ export default {
   name: "register",
   data() {
     return {
-      name: "",
       username: "",
       email: "",
       password: "",
@@ -56,21 +55,18 @@ export default {
       e.preventDefault();
 
       this.SIGN_UP({
-        name: this.name,
         username: this.username,
         email: this.email,
         password: this.password,
         password2: this.password2
       });
 
-      if (localStorage.getItem("jwt") != null) {
-        this.$emit("loggedIn");
-        if (this.$route.params.nextUrl != null) {
-          this.$router.push(this.$route.params.nextUrl);
-        } else {
-          this.$router.push("profile");
-        }
-      }
+      this.$router.push("dashboard");
+    }
+  },
+  created() {
+    if (localStorage.getItem("jwt")) {
+      this.$router.push("dashboard");
     }
   }
 };

@@ -1,0 +1,50 @@
+#form-card {
+    background: white;
+    max-width: 500px;
+    margin: 0 1em;
+    border-radius: 10px;
+    box-shadow: $shadow;
+
+    .card-title {
+        padding: 1.5em;
+        margin: 0;
+        text-align: center;
+        text-transform: uppercase;
+        color: $dark;
+    }
+
+    form {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1em;
+
+        .form-control {
+            margin-bottom: 1.5em;
+            border-radius: 5px;
+            background: $light;
+            border: none;
+            height: 2.5em;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1em;
+        }
+    }
+}
+
+.form-control {
+    background: none;
+}
+
+.form-control:focus {
+    background: $light;
+    outline: none;
+}
+
+.custom-select {
+    border-radius: 10px;
+    border: solid 1px $lighter;
+}

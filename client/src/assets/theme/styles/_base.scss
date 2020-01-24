@@ -1,118 +1,84 @@
 body {
+    background: $light;
+    color: $dark;
+    letter-spacing: 1px;
+    font-family: 'Cabin', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background: $blue;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+
+    .navbar-nav {
+        text-transform: uppercase;
+
+        button {
+            background: none;
+            border: none;
+            text-transform: uppercase;
+            margin: 0;
+        }
+    }
+}
+
+footer {
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5em;
+    background: $yellow;
+    border: none;
+    border-radius: 5px;
+    color: $dark;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.btn2 {
+    background: $light;
     color: $dark;
 }
 
-input {
-    background: none;
+.landing {
+    min-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 a {
     color: $blue;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    border: none;
-    border-radius: 15px;
-    padding: 2em;
-    background: white;
-    color: $dark;
-    box-shadow: $shadow;
+.btn:hover {
+    background: $hover-y;
 }
 
-.btn {
-    background: $yellow;
-    border: none;
-    color: $dark;
-    text-transform: uppercase;
-}
-
-.navbar {
-    background: $dark;
-    min-height: 10vh;
-}
-
-.navbar-light .navbar-collapse {
-
-    .nav-link {
-        color: $transparent;
-        font-weight: 500;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-    }
-
-    .nav-link:hover {
-        color: $light;
-    }
-}
-
-.dropdown {
-    border: solid;
-    height: 100%;
-    display: flex;
-    border: none;
-
-    .dropdown-toggle {
-        color: $transparent;
-        font-weight: 500;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        background: none;
-        border: none;
-        padding: 0;
-    }
+.btn2:hover {
+    background: $hover;
 }
 
 a:hover {
     text-decoration: none;
-    color: $dark-blue;
-}
-
-.btn:hover {
-    background: $yellow;
-    color: $dark;
-}
-
-.input-group {
-    // max-width: 300px;
-
-    .form-control {
-        height: 2.5em;
-        border-radius: 50px;
-        background: white;
-        border: none;
-        // border: solid 1.5px $light;
-        // border-right: none;
-    }
-
-    button {
-        border-radius: 50px;
-        border: none;
-        // border: solid 1.5px $light;
-        // border-left: none;
-        background: white;
-        color: $dark-transparent;
-    }
-
-    button:hover {
-        color: $dark;
-        background: white;
-    }
-}
-
-footer {
-    height: 10vh;
-    background: $dark;
-    color: $transparent;
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    p {
-        padding: 0;
-        margin: 0;
-    }
 }

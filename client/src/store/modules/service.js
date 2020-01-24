@@ -1,39 +1,40 @@
 import Axios from 'axios';
 
 const state = {
-    services: [],
-    weather: {}
+    weather: {},
+    weathers: []
 };
 
 const getters = {
-    getServices: state => state.services,
-    getWeather: state => state.weather
+    getWeather: state => state.weather,
+    getWeathers: state => state.weathers
 };
 
 const actions = {
-    LOAD_SERVICES({ commit }) {
-        Axios.get('http://localhost:3000/user/service')
-            .then(response => {
-                let services = response.data.services;
-                commit('load_services', services);
-            })
-            .catct(err => alert(err));
-    },
+    // Get weather data
     GET_WEATHER({ commit }, city) {
-        Axios.get(`http://localhost:3000/user/service/weather/${city}`)
+        Axios.get(`http://localhost:3000/user/v1/service/weather/${city}`)
             .then(response => {
                 commit('set_weather', response.data.weather);
+            })
+            .catch(err => alert(err));
+    },
+    // Get all weathers from database
+    GET_ALL({ commit }) {
+        Axios.get('http://localhost:3000/weather/v1')
+            .then(response => {
+                commit('set_all', response.data.weathers);
             })
             .catch(err => alert(err));
     }
 };
 
 const mutations = {
-    load_services: (state, services) => {
-        state.services = services;
-    },
     set_weather: (state, weather) => {
         state.weather = weather;
+    },
+    set_all: (state, weathers) => {
+        state.weathers = weathers;
     }
 };
 

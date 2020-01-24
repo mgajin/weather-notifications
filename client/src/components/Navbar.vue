@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <nav class="navbar navbar-expand-lg navbar-light">
+  <div class>
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container">
+        <router-link to="/" class="navbar-brand">WeatherAPI</router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -13,33 +14,33 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <router-link to="/" class="nav-link">
-                <i class="fas fa-home"></i> home
-              </router-link>
+              <router-link to="/" class="nav-link">home</router-link>
             </li>
             <li class="nav-item">
-              <div class="dropdown" v-if="getUser">
-                <button
-                  class="dropdown-toggle"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-user-circle"></i>
-                  {{getUser.username}}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <router-link to="/profile" v-model="username" class="dropdown-item">Account</router-link>
-                  <button @click="logout" class="dropdown-item" type="button">Logout</button>
-                </div>
-              </div>
-              <router-link to="/login" class="nav-link" v-else>
+              <a class="nav-link" href>Docs</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" v-if="!this.getUser">
+              <router-link to="/login" class="nav-link">
                 <i class="fas fa-sign-in-alt"></i> login
               </router-link>
+            </li>
+            <li class="nav-item" v-if="!this.getUser">
+              <router-link to="/register" class="nav-link">
+                <i class="fas fa-user-plus"></i> register
+              </router-link>
+            </li>
+            <li class="nav-item" v-if="this.getUser">
+              <router-link to="/dashboard" class="nav-link">{{this.getUser.username}}</router-link>
+            </li>
+            <li class="nav-item" v-if="this.getUser">
+              <button class="nav-link" @click="this.logout">
+                <i class="fas fa-sign-out-alt"></i> log out
+              </button>
             </li>
           </ul>
         </div>
@@ -50,20 +51,19 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "navbar",
-  data() {
-    return {
-      username: ""
-    };
-  },
   methods: {
     ...mapActions(["SIGN_OUT"]),
-    logout() {
+    logout(e) {
+      e.preventDefault();
       this.SIGN_OUT();
 
-      this.$router.push("/login");
+      if (!this.getUser) {
+        this.$router.push("/");
+      }
     }
   },
   computed: mapGetters(["getUser"])

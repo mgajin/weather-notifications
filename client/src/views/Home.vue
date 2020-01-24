@@ -1,22 +1,74 @@
 <template>
-  <div class="home">
-    <div class="container">
-      <h1>Don't have an account?</h1>
-      <router-link to="/register">
-        <h5>Sign up here</h5>
-      </router-link>
+    <div>
+        <section class="landing" id="home">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6" id="about">
+                        <h1>Weather Service</h1>
+                        <hr />
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing
+                            elit. Magnam eaque exercitationem qui
+                        </p>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="" class="btn">get started</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a
+                                    href="https://github.com/mgajin/weather-app"
+                                    target="_blank"
+                                    class="btn btn2"
+                                    >download</a
+                                >
+                            </div>
+                        </div>
+                        <p>Curently v1.0.0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 border" id="service">
+                    <h2>Current Weather</h2>
+                    <hr />
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Magnam eaque exercitationem qui
+                    </p>
+                    <hr />
+                    <button class="btn" id="sub">subscribe</button>
+                </div>
+                <div class="col-md-4 border" id="service">
+                    <h2>Daily Weather</h2>
+                    <hr />
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Magnam eaque exercitationem qui
+                    </p>
+                    <hr />
+                    <button class="btn" id="sub">subscribe</button>
+                </div>
+                <div class="col-md-4 border" id="service">
+                    <h2>Weekly Weather</h2>
+                    <hr />
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Magnam eaque exercitationem qui
+                    </p>
+                    <hr />
+                    <button class="btn" id="sub">subscribe</button>
+                </div>
+            </div>
+        </section>
     </div>
-    <div class="container">
-      <Service />
-    </div>
-  </div>
 </template>
 
 <script>
-import Service from "../components/Service";
-
-export default {
-  name: "home",
-  components: { Service }
-};
+export default {};
 </script>
+
+<style></style>

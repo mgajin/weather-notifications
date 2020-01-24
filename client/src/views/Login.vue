@@ -1,28 +1,39 @@
 <template>
-  <div class="page">
-    <form>
-      <div class="form-group">
-        <label for>Email address</label>
-        <input type="text" placeholder="Enter email" v-model="email" class="form-control" />
+  <div class="container landing">
+    <div class="row" id="form-card">
+      <div class="col-12 card-title">
+        <h3>login</h3>
       </div>
-      <div class="form-group">
-        <label for>Password</label>
-        <input type="password" placeholder="Enter password" v-model="password" class="form-control" />
-      </div>
-      <button type="submit" class="btn" @click="login">Log in</button>
-      <router-link to="/register">Create an account</router-link>
-    </form>
+      <form class="col-12" action="submit">
+        <input type="text" class="form-control" placeholder="Username" required v-model="username" />
+
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          required
+          v-model="password"
+        />
+
+        <button type="submit" class="btn" @click="login">submit</button>
+
+        <p>
+          Don't have an account?
+          <router-link to="/register">Sign Up</router-link>
+        </p>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "login",
   data() {
     return {
-      email: "",
+      username: "",
       password: ""
     };
   },
@@ -31,16 +42,18 @@ export default {
     login(e) {
       e.preventDefault();
 
-      this.SIGN_IN({ email: this.email, password: this.password });
+      this.SIGN_IN({
+        username: this.username,
+        password: this.password
+      });
 
-      if (localStorage.getItem("jwt") != null) {
-        this.$emit("loggedIn");
-        if (this.$route.params.nextUrl != null) {
-          this.$router.push(this.$route.params.nextUrl);
-        } else {
-          this.$router.push("profile");
-        }
-      }
+      this.$router.push("dashboard");
+    }
+  },
+  computed: mapGetters(["getToken"]),
+  created() {
+    if (localStorage.getItem("jwt")) {
+      this.$router.push("dashboard");
     }
   }
 };

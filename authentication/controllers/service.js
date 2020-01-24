@@ -99,3 +99,33 @@ exports.subscribe = async (req, res) => {
 
     res.status(200).json({ success: true, user });
 };
+
+// @desc    Remove city from subscription list
+// @route   PUT /service/remove
+exports.remove = async (req, res) => {
+    const { username, city } = req.body;
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+        return res.status(404).send(`User ${username} not found`);
+    }
+
+    let list = user.subscription.list;
+
+    if (list.includes(city)) {
+        for (i in list) {
+            if (list[i] === city) break;
+        }
+        list.splice(i, 1);
+        user.subscription.list = list;
+    }
+
+    if (!user.subscription.list.length) {
+        user.subscription.status = false;
+    }
+
+    user.save();
+
+    res.status(200).json({ success: true, user });
+};

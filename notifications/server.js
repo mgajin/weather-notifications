@@ -1,27 +1,31 @@
-const amqp = require('amqplib/callback_api');
+const express = require('express');
+const dotenv = require('dotenv');
+const morgan = require('morgan');
+const colors = require('colors');
+const bodyParser = require('body-parser');
 
-amqp.connect('amqp://localhost', (error, connection) => {
-    if (error) {
-        throw error;
-    }
-    connection.createChannel((err, channel) => {
-        if (err) {
-            throw err;
-        }
-
-        let queue = 'node_queue';
-        let msg = 'Test message';
-
-        channel.assertQueue(queue, {
-            durable: true
-        });
-        channel.sendToQueue(queue, Buffer.from(msg), {
-            persistent: true
-        });
-        console.log(`Sent ${msg}`);
-    });
-    setTimeout(function() {
-        connection.close();
-        process.exit(0);
-    }, 500);
+// Load config vars
+dotenv.config({
+    path: './config/config.env'
 });
+
+const PORT = process.env.PORT || 3003;
+
+const app = express();
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/v1', require('./routes/notifications'));
+
+const server = app.listen(
+    PORT,
+    console.log(
+        `Server runing in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
+            .bold
+    )
+);

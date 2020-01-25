@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/v1', require('./routes/notifications'));
+const service = require('./service/notifications');
 
 const server = app.listen(
     PORT,

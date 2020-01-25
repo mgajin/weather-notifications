@@ -1,3 +1,1 @@
-authentication/config/config.env
-service_api/config/config.env
-notifications/config/config.env
+gateway/

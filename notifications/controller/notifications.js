@@ -31,41 +31,14 @@ exports.getWeather = async city => {
             `http://localhost:3002/v1/city?name=${city}`
         );
 
-        const weather = response.data.weather;
+        let weather = response.data.weather;
 
         if (!weather) {
             console.log(`Weather for ${city} not found`);
             return null;
         }
-
         return weather;
     } catch (error) {
         console.log(error);
     }
 };
-
-function sendMail(user, text) {
-    console.log(`${user}, ${text}`);
-
-    // let transporter = nodemailer.createTransport({
-    //     host: 'smtp.googlemail.com',
-    //     auth: {
-    //         user: `${process.env.USERNAME}`,
-    //         pass: `${process.env.PASSWORD}`
-    //     }
-    // });
-
-    // let mailOptions = {
-    //     from: '"WeatherAPI" <markogajiin@gmail.com>',
-    //     to: user,
-    //     subject: 'Weather',
-    //     text: `${text}`
-    // };
-
-    // transporter.sendMail(mailOptions, (error, info) => {
-    //     if (error) {
-    //         return console.log(error);
-    //     }
-    //     console.log(`Email sent: ${info.messageId}`);
-    // });
-}

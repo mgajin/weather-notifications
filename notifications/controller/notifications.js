@@ -25,6 +25,25 @@ exports.getUsers = async () => {
     }
 };
 
+exports.getWeather = async city => {
+    try {
+        let response = await axios.get(
+            `http://localhost:3002/v1/city?name=${city}`
+        );
+
+        const weather = response.data.weather;
+
+        if (!weather) {
+            console.log(`Weather for ${city} not found`);
+            return null;
+        }
+
+        return weather;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 function sendMail(user, text) {
     console.log(`${user}, ${text}`);
 

@@ -1,4 +1,4 @@
-const exporess = require('express');
+const express = require('express');
 
 const {
     fetchWeather,
@@ -8,7 +8,7 @@ const {
     getWeathers
 } = require('../controllers/weather');
 
-const router = exporess.Router();
+const router = express.Router();
 
 router.route('/api/:city').get(fetchWeather);
 router.route('/city').get(getWeather);

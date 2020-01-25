@@ -1,7 +1,6 @@
 const exporess = require('express');
 
 const {
-    getServices,
     getWeather,
     getWeathers,
     subscribe,
@@ -10,7 +9,6 @@ const {
 
 const router = exporess.Router();
 
-router.get('/', getServices);
 router.get('/weather/:city', getWeather);
 router.get('/weathers', getWeathers);
 router.put('/subscribe', subscribe);

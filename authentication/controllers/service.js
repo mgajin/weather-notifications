@@ -24,22 +24,6 @@ exports.getServices = async (req, res) => {
     }
 };
 
-// @desc    Get single service by ID
-// @route   GET /service/:id
-exports.getService = async (req, res) => {
-    try {
-        const service = await Service.findById(req.params.id);
-
-        if (!service) {
-            return res
-                .status(404)
-                .send(`Service with ID of ${req.params.id} not found`);
-        }
-
-        res.status(200).json({ success: true, service });
-    } catch (error) {}
-};
-
 // @desc    Get weather from weather service api
 // @route   GET /service/weather/:city
 exports.getWeather = async (req, res) => {
@@ -93,7 +77,9 @@ exports.subscribe = async (req, res) => {
         return res.status(404).send(`User ${username} not found`);
     }
 
-    user.subscription.list.push(city);
+    if (!user.subscription.list.contains(city)) {
+        user.subscription.list.push(city);
+    }
     user.subscription.status = true;
     user.save();
 

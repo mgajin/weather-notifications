@@ -4,19 +4,7 @@ const User = require('../models/User');
 // @route   GET /users
 // @route   GET /users?subscribed=true
 exports.getUsers = async (req, res) => {
-    let users;
-    // const query = req.query.subscribed;
-    // If query than return subscribed users
-    // if (query) {
-    //     users = await User.find({
-    //         subscription: {
-    //             status: true
-    //         }
-    //     });
-    // } else {
-    //     users = await User.find();
-    // }
-    users = await User.find();
+    let users = await User.find();
     let subscribed_users = new Array();
 
     for (i in users) {
@@ -30,5 +18,5 @@ exports.getUsers = async (req, res) => {
         return res.status(404).send('Users not found');
     }
 
-    res.status(200).json({ success: true, subscribed_users });
+    res.status(200).json({ success: true, users: subscribed_users });
 };

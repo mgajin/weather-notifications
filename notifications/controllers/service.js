@@ -25,6 +25,7 @@ exports.getUsers = async () => {
     }
 };
 
+// @desc    Get weather from weather service
 exports.getWeather = async city => {
     try {
         let response = await axios.get(
@@ -35,7 +36,6 @@ exports.getWeather = async city => {
 
         if (!weather) {
             console.log(`Weather for ${city} not found`);
-            return null;
         }
         return weather;
     } catch (error) {

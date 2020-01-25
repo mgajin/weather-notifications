@@ -2,8 +2,9 @@ const nodemailer = require('nodemailer');
 const schedule = require('node-schedule');
 const transporter = require('../config/transporter');
 
-const { getUsers, getWeather } = require('../controller/notifications');
+const { getUsers, getWeather } = require('./service');
 
+// @desc    Scedule notifications
 let notifications = schedule.scheduleJob('*/1 * * * *', async () => {
     const users = await getUsers();
     let weathers = new Array();
@@ -18,6 +19,7 @@ let notifications = schedule.scheduleJob('*/1 * * * *', async () => {
     }
 });
 
+// @desc    Make email text
 function makeMessage(weathers) {
     let text = 'Weathers for today \n';
 
@@ -28,10 +30,11 @@ function makeMessage(weathers) {
     return text;
 }
 
+// @desc    Send email to user
 function sendEmail(user, weathers) {
     let mailOptions = {
         from: `"WeatherAPI" <${process.env.USERNAME}>`,
-        to: 'mgajin17@raf.rs',
+        to: `${user.email}`,
         subject: 'Weather',
         text: makeMessage(weathers)
     };

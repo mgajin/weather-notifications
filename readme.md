@@ -13,14 +13,12 @@ npm install
 ## Run Apps
 
 ```
-# gateway, authentication, service_api, notifications
-# Run in dev mode
+# gateway, authentication, weather, notifications (run in dev mode)
 npm run dev
 ```
 
 ```
 # client
-
 npm run serve
 
 ```

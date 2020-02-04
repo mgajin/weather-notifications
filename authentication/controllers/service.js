@@ -77,7 +77,7 @@ exports.subscribe = async (req, res) => {
         return res.status(404).send(`User ${username} not found`);
     }
 
-    if (!user.subscription.list.contains(city)) {
+    if (!user.subscription.list.includes(city)) {
         user.subscription.list.push(city);
     }
     user.subscription.status = true;
